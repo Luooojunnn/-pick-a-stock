@@ -1,10 +1,16 @@
 import { serve } from "bun";
 import index from "./index.html";
+import { route as stockBasicRoute } from "./apis/stock-basic";
+import { route as dailyRecommendationsRoute } from "./apis/get-the-daily-recommendations";
 
 const server = serve({
   routes: {
     // Serve index.html for all unmatched routes.
     "/*": index,
+
+    // 批量注入 Tushare 相关接口
+    ...stockBasicRoute,
+    ...dailyRecommendationsRoute,
 
     "/api/hello": {
       async GET(req) {

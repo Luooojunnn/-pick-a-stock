@@ -1,38 +1,57 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { APITester } from "./APITester";
-import "./index.css";
+import { useNavigate, useLocation, Routes, Route } from "react-router-dom";
+import { Layout, Menu } from "antd";
+import type { MenuProps } from "antd";
+import { TodaysRecommendation } from "./pages/TodaysRecommendation";
+import { UnderDevelopment } from "./pages/UnderDevelopment";
 
-import logo from "./logo.svg";
-import reactLogo from "./react.svg";
+const { Sider, Content } = Layout;
 
+// ────────────────────────────────────────────────────────────
+// 侧边菜单配置
+// ────────────────────────────────────────────────────────────
+const menuItems: MenuProps["items"] = [
+  {
+    key: "/todays-recommendation",
+    label: "今日推荐",
+  },
+];
+
+// ────────────────────────────────────────────────────────────
+// 主布局
+// ────────────────────────────────────────────────────────────
 export function App() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // HashRouter 下 location.pathname 就是 hash 后的路径
+  const selectedKey = location.pathname || "/todays-recommendation";
+
+  const onMenuClick: MenuProps["onClick"] = ({ key }) => {
+    navigate(key);
+  };
+
   return (
-    <div className="container mx-auto p-8 text-center relative z-10">
-      <div className="flex justify-center items-center gap-8 mb-8">
-        <img
-          src={logo}
-          alt="Bun Logo"
-          className="h-36 p-6 transition-all duration-300 hover:drop-shadow-[0_0_2em_#646cffaa] scale-120"
+    <Layout style={{ minHeight: "100vh" }}>
+      <Sider theme="dark" width={200}>
+        <Menu
+          theme="dark"
+          mode="inline"
+          selectedKeys={[selectedKey]}
+          items={menuItems}
+          onClick={onMenuClick}
+          style={{ height: "100%", borderRight: 0 }}
         />
-        <img
-          src={reactLogo}
-          alt="React Logo"
-          className="h-36 p-6 transition-all duration-300 hover:drop-shadow-[0_0_2em_#61dafbaa] [animation:spin_20s_linear_infinite]"
-        />
-      </div>
-      <Card>
-        <CardHeader className="gap-4">
-          <CardTitle className="text-3xl font-bold">Bun + React</CardTitle>
-          <CardDescription>
-            Edit <code className="rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono">src/App.tsx</code> and save to
-            test HMR
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <APITester />
-        </CardContent>
-      </Card>
-    </div>
+      </Sider>
+
+      <Layout>
+        <Content style={{ background: "#fff" }}>
+          <Routes>
+            <Route path="/todays-recommendation" element={<TodaysRecommendation />} />
+            <Route path="*" element={<UnderDevelopment />} />
+          </Routes>
+        </Content>
+      </Layout>
+    </Layout>
   );
 }
 
