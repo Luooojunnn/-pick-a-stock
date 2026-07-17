@@ -158,6 +158,12 @@ export async function runScreening(
   const historyByCode = await fetchDailyHistory(tsCodes, startDate, referenceDay);
   log(`当前在 fetchDailyHistory：历史序列拉取完成，${historyByCode.size} 只有数据`);
 
+  // 打印进入阶段B 的候选（仅股票代码 + 名称），方便用户手工核对
+  log("当前在 fetchDailyHistory：待筛选候选如下（便于手工核对）——");
+  for (const cand of survivors) {
+    log(`  · ${cand.ts_code} ${cand.name}`);
+  }
+
   log("当前在 runStageB：开始阶段B 历史序列筛选（成交量递增 + 均线趋势分级）…");
   const stageBResult: CandidateStock[] = runStageB(
     survivors,
