@@ -2,6 +2,7 @@ import { useNavigate, useLocation, Routes, Route } from "react-router-dom";
 import { Layout, Menu } from "antd";
 import type { MenuProps } from "antd";
 import { TodaysRecommendation } from "./pages/TodaysRecommendation";
+import { HowToSell } from "./pages/HowToSell";
 import { UnderDevelopment } from "./pages/UnderDevelopment";
 
 const { Sider, Content } = Layout;
@@ -13,6 +14,10 @@ const menuItems: MenuProps["items"] = [
   {
     key: "/todays-recommendation",
     label: "今日推荐",
+  },
+  {
+    key: "/how-to-sell",
+    label: "我的股票合适卖",
   },
 ];
 
@@ -47,6 +52,8 @@ export function App() {
         <Content style={{ background: "#fff" }}>
           <Routes>
             <Route path="/todays-recommendation" element={<TodaysRecommendation />} />
+            {/* 我的股票合适卖页面路由（需求 1.1） */}
+            <Route path="/how-to-sell" element={<HowToSell />} />
             <Route path="*" element={<UnderDevelopment />} />
           </Routes>
         </Content>

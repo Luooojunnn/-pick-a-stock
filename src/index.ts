@@ -2,6 +2,7 @@ import { serve } from "bun";
 import index from "./index.html";
 import { route as stockBasicRoute } from "./apis/stock-basic";
 import { route as dailyRecommendationsRoute } from "./apis/get-the-daily-recommendations";
+import { route as howToSellRoute } from "./apis/how-to-sell";
 
 const server = serve({
   routes: {
@@ -11,6 +12,7 @@ const server = serve({
     // 批量注入 Tushare 相关接口
     ...stockBasicRoute,
     ...dailyRecommendationsRoute,
+    ...howToSellRoute,
 
     "/api/hello": {
       async GET(req) {
