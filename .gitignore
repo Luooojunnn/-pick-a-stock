@@ -26,9 +26,15 @@ report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
 .eslintcache
 .cache
 *.tsbuildinfo
+# CAN SLIM 本地行情库（由 src/scripts/sync-market-data.ts 生成，可重建）
+data/*.sqlite
+data/*.sqlite-wal
+data/*.sqlite-shm
 
 # IntelliJ based IDEs
 .idea
 
 # Finder (MacOS) folder config
 .DS_Store
+
+tushareConfig.json

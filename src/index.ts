@@ -3,6 +3,7 @@ import index from "./index.html";
 import { route as stockBasicRoute } from "./apis/stock-basic";
 import { route as dailyRecommendationsRoute } from "./apis/get-the-daily-recommendations";
 import { route as howToSellRoute } from "./apis/how-to-sell";
+import { route as canSlimRoute } from "./apis/can-slim";
 
 const server = serve({
   routes: {
@@ -13,6 +14,7 @@ const server = serve({
     ...stockBasicRoute,
     ...dailyRecommendationsRoute,
     ...howToSellRoute,
+    ...canSlimRoute,
 
     "/api/hello": {
       async GET(req) {

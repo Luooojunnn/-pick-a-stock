@@ -3,6 +3,7 @@ import { Layout, Menu } from "antd";
 import type { MenuProps } from "antd";
 import { TodaysRecommendation } from "./pages/TodaysRecommendation";
 import { HowToSell } from "./pages/HowToSell";
+import { CanSlim } from "./pages/CanSlim";
 import { UnderDevelopment } from "./pages/UnderDevelopment";
 
 const { Sider, Content } = Layout;
@@ -18,6 +19,10 @@ const menuItems: MenuProps["items"] = [
   {
     key: "/how-to-sell",
     label: "我的股票合适卖",
+  },
+  {
+    key: "/can-slim",
+    label: "CAN SLIM 选股",
   },
 ];
 
@@ -54,6 +59,8 @@ export function App() {
             <Route path="/todays-recommendation" element={<TodaysRecommendation />} />
             {/* 我的股票合适卖页面路由（需求 1.1） */}
             <Route path="/how-to-sell" element={<HowToSell />} />
+            {/* CAN SLIM 七因子选股 */}
+            <Route path="/can-slim" element={<CanSlim />} />
             <Route path="*" element={<UnderDevelopment />} />
           </Routes>
         </Content>
